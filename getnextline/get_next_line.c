@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: captain <captain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:12:39 by amezioun          #+#    #+#             */
-/*   Updated: 2024/06/08 14:44:08 by amezioun         ###   ########.fr       */
+/*   Updated: 2024/06/14 20:03:24 by captain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <signal.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 int	ft_strlen(char *s)
 {
