@@ -1,6 +1,7 @@
 NAME = so_long
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror 
+# -fsanitize=address -g
 SRCS = libc_utils.c so_long.c getnextline/get_next_line_utils.c getnextline/get_next_line.c
 OBJS = $(SRCS:.c=.o)
 
