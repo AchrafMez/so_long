@@ -1,3 +1,4 @@
+#include <string.h>
 #include "so_long.h"
 
 void ft_error()
@@ -5,34 +6,7 @@ void ft_error()
     write(2, "Error\n", 6);
     exit(1);
 }
-char *ext(char *str)
-{
-    // int i = 0;
-    while(*str)
-    {
-        if(*str == '.')
-            return((char *)str+1);
-        str++;
-    }
-    return NULL;
-}
 
-int camp(char *str)
-{
-    char *ext = "ber";
-    int i = 0;
-    while(str[i])
-    {
-        if(str[i] != ext[i])
-            return -1;
-        i++;
-    }
-    return 0;
-}
-// void treat()
-// {
-
-// }
 
 int map_lines(int fd)
 {
@@ -41,7 +15,6 @@ int map_lines(int fd)
         i++;
     return i;
 }
-#include <string.h>
 
 void ft_strcpy(char *line, char *map)
 {
@@ -66,6 +39,68 @@ void ft_free(char **map, int i)
         free(map[i]);
     free(map);
 }
+
+int camp(char *filename)
+{
+    char *ext = ".ber";
+    int i = ft_strlen(filename) - 4;
+    while(filename[i])
+    {
+        if(filename[i] != *ext)
+            return -1;
+        ext++;
+        i++;
+    }
+    return 0;
+}
+
+int map_rectangular(int fd, char *filename)
+{
+    // fd = open(filename, O_RDONLY);
+    if(fd <= 0 || !filename)
+        ft_error();
+    char *line;
+    static int len = 0;
+    // int len1 = 0;
+    int nline = 0;
+    while((line = get_next_line(fd)) != NULL)
+    {
+        len += ft_strlen(line);
+        // if(len != 0 && len1 != 0 && len !=)
+        nline += 1;
+    }
+        // printf("line len --> %d\n", len);
+        // printf("numbers of line --> %d\n", nline);
+    if((len % nline) != 0)
+    {
+        printf("lines error");
+        return 1;
+    }
+        else
+            printf("lines correct");
+    return 0;
+}
+
+int main(int ac, char **av)
+{
+    char *filename = av[1];
+    int fd = open(filename, O_RDONLY);
+    if(ac != 2)
+        ft_error();
+    else
+    {
+        if(camp(filename) == -1)
+        {
+            printf("filename error\n");
+            return 1;
+        }
+        else
+            map_rectangular(fd, filename);
+    }
+    close(fd);
+}
+
+
 // int main()
 // {
 //     char *filename = "map.ber";
@@ -118,14 +153,3 @@ void ft_free(char **map, int i)
     
 // }
 
-int main(int ac, char **av)
-{
-    if(ac != 2)
-        printf("Error in arguments\n");
-    else
-    {
-        char *str = av[1];
-        ext(str);
-        printf("%s");
-    }
-}
