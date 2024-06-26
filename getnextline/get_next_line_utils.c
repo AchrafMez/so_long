@@ -6,7 +6,7 @@
 /*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:12:43 by amezioun          #+#    #+#             */
-/*   Updated: 2024/03/02 09:25:48 by amezioun         ###   ########.fr       */
+/*   Updated: 2024/06/26 12:54:29 by amezioun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ char	*copy_until_nl(char *sbuff)
 		return (NULL);
 	while (sbuff[i] && sbuff[i] != '\n')
 		i++;
-	if (sbuff[i] && sbuff[i] == '\n')
-		i += 1;
-	cunl = malloc(i + 1);
+	// if (sbuff[i] && sbuff[i] == '\n')
+	// 	i += 1;
+	cunl = malloc(i );
 	if (!cunl)
 		return (NULL);
 	i = 0;
@@ -99,8 +99,10 @@ char	*copy_until_nl(char *sbuff)
 		i++;
 	}
 	if (sbuff && sbuff[i] == '\n')
-		cunl[i++] = '\n';
-	cunl[i] = '\0';
+		cunl[i] = '\0';
+	else
+		cunl[i] = '\0';
+	i++;
 	return (cunl);
 }
 

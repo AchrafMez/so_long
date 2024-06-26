@@ -6,7 +6,7 @@
 /*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:12:39 by amezioun          #+#    #+#             */
-/*   Updated: 2024/06/24 17:29:16 by amezioun         ###   ########.fr       */
+/*   Updated: 2024/06/26 13:09:13 by amezioun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,3 +83,18 @@ char	*get_next_line(int fd)
 	sbuff = copy_after_nl(sbuff);
 	return (line);
 }
+// int main()
+// {
+// 	// char *filename = "map.ber";
+	// int fd = open("map.ber", O_RDONLY);
+	// char *line = get_next_line(fd);
+// 	char *line2 = get_next_line(fd);
+// 	char *line3 = get_next_line(fd);
+// 	char *line4 = get_next_line(fd);
+// 	char *line5 = get_next_line(fd);
+	// printf("%s", line);
+// 	printf("%s", line2);
+// 	printf("%s", line3);
+// 	printf("%s", line4);
+// 	printf("%s", line5);
+// }

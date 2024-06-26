@@ -12,34 +12,39 @@ void ones_line(char *line)
     int i = 0;
     while(line[i] != '\0')
     {
-        if(line[i] != '1' && line[i] != '\n')
+        if(line[i] != '1')
             ft_error();
         i++;
     }
 }
+
 void map_len(char **map)
 {
     int y = 0;
-    int len = 0;
+    int len = ft_strlen(map[y]);
     int len1 = 0;
-    printf("entering");
-    while(map[y] !=  NULL)
+    while(map[y])
     {
-        len = (ft_strlen(map[y++]) - 1);
-        if(map[y][len] == '\0')
-            len -= 1;
-        printf("len -> %d\n ", len);
-        len1 = (ft_strlen(map[y++]) - 1);
-        printf("len1 -> %d\n ", len1);
-        if(len != len1)
+        len1 = ft_strlen(map[y]);
+        if(len != ft_strlen(map[y]))
         {
-            printf("lines not equal !\n");
+            printf("something wrong with lines !\n");
+            return ;
+        }
+        else if(map[y][0] != '1')
+            ft_error();
+        else if(map[y][len1-1] != '1')
+        {
+            printf("last character -> %c\n", map[y][len1-1]);
             ft_error();
         }
+        y++;
     }
+    ones_line(map[y - 1]);
     printf("lines are equal !\n");
     return ;
 }
+
 void map_rectangular(char **map)
 {
     // t_map check;
@@ -52,7 +57,7 @@ void map_rectangular(char **map)
     while(map[y][x])
     {
         len = ft_strlen(map[y]);
-        printf("%c", map[y][x]);
+        // printf("%c", map[y][x]);
         x++;
     }
     // while(map[0][i])
