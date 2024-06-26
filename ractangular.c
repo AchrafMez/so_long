@@ -18,6 +18,44 @@ void ones_line(char *line)
     }
 }
 
+// typedef struct s_info{
+//     int x;
+//     int p;
+//     int e;
+//     int c;
+// } t_info;
+
+void check(char *line)
+{
+    int x = 0;
+    static int p = 0;
+    static int c = 0;
+    static int e = 0;
+    printf("line -> %s", line);
+    while(line[x])
+    {
+        if(line[x] == 'E')
+            e++;
+        if(line[x] == 'C')
+            c++;
+        if(line[x] == 'P')
+            p++;
+        if(line[x] == '1' || line[x] == '0')
+            x++;
+        else if(line[x] != 'C' || line[x] != 'E' || line[x] != 'P')
+            ft_error();
+        x++;
+    }
+    if(c == 0 || p > 1 || e > 1 || e == 0 || p == 0)
+    {
+        printf("player -> %d\n", p);
+        printf("coins -> %d\n", e);
+        printf("player -> %d\n", c);
+        printf("coins player and exit\n");
+        return ;
+    }
+    return ;
+}
 void map_len(char **map)
 {
     int y = 0;
@@ -34,10 +72,8 @@ void map_len(char **map)
         else if(map[y][0] != '1')
             ft_error();
         else if(map[y][len1-1] != '1')
-        {
-            printf("last character -> %c\n", map[y][len1-1]);
             ft_error();
-        }
+        check(map[y]);
         y++;
     }
     ones_line(map[y - 1]);
@@ -57,19 +93,8 @@ void map_rectangular(char **map)
     while(map[y][x])
     {
         len = ft_strlen(map[y]);
-        // printf("%c", map[y][x]);
         x++;
     }
-    // while(map[0][i])
-    // {
-    //     printf("i -> %d", i);
-    //     if(map[0][i] == '1')
-    //         printf("correct\n");
-    //     else
-    //         printf("false\n");
-    //     i++;
-    // }
-    // printf("correct line");
     return ;
 }
 
