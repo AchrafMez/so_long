@@ -25,34 +25,47 @@ void ones_line(char *line)
 //     int c;
 // } t_info;
 
+int map_check(char **map)
+{
+    int x = 0;
+    int y = 0;
+    int p = 0;
+    int c = 0;
+    int e = 0;
+
+    while(map[y])
+    {
+        x = 0;
+        while(map[y][x])
+        {
+            if(map[y][x] == 'E')
+                e++;
+            else if(map[y][x] == 'C')
+                c++;
+            else if(map[y][x] == 'P')
+                p++;
+            x++;
+        }
+        y++;
+    }
+    if(c <= 0 || p <= 0 || p > 1 || e <= 0 || e > 1)
+        return 1;
+    else
+        return 0;
+}
 void check(char *line)
 {
     int x = 0;
-    static int p = 0;
-    static int c = 0;
-    static int e = 0;
-    printf("line -> %s", line);
+    
+    printf("%s\n", line);
     while(line[x])
     {
-        if(line[x] == 'E')
-            e++;
-        if(line[x] == 'C')
-            c++;
-        if(line[x] == 'P')
-            p++;
-        if(line[x] == '1' || line[x] == '0')
-            x++;
-        else if(line[x] != 'C' || line[x] != 'E' || line[x] != 'P')
+        if(line[x] != '1' && line[x] != '0' && line[x] != 'C' && line[x] != 'E' && line[x] != 'P')
+        {
+            printf("%c\n", line[x]);
             ft_error();
+        }
         x++;
-    }
-    if(c == 0 || p > 1 || e > 1 || e == 0 || p == 0)
-    {
-        printf("player -> %d\n", p);
-        printf("coins -> %d\n", e);
-        printf("player -> %d\n", c);
-        printf("coins player and exit\n");
-        return ;
     }
     return ;
 }
@@ -77,7 +90,10 @@ void map_len(char **map)
         y++;
     }
     ones_line(map[y - 1]);
-    printf("lines are equal !\n");
+    if(map_check(map) == 1)
+        ft_error();
+    else
+        printf("lines are equal !\n");
     return ;
 }
 
