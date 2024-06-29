@@ -135,5 +135,6 @@ int main(int ac, char **av)
             // map_rectangular(fd, filename);
     }
     close(fd);
+    void *mlx = mlx_init();
     // system("leaks so_long");
 }

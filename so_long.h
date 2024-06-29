@@ -7,6 +7,7 @@
 #include <string.h>
 // #include "printf/ft_printf.h"
 #include "getnextline/get_next_line.h"
+#include "./MLX42/include/MLX42/MLX42.h"
 
 typedef struct s_map{
     int player;
