@@ -1,5 +1,6 @@
 #include <string.h>
 #include "so_long.h"
+#include "MLX42/include/MLX42/MLX42.h"
 
 void ft_error()
 {
@@ -135,6 +136,12 @@ int main(int ac, char **av)
             // map_rectangular(fd, filename);
     }
     close(fd);
-    void *mlx = mlx_init();
+    mlx_t *mlx;
+    // int a = 0;
+    // void *new_window;
+    mlx = mlx_init(800, 800, "so_long", true);
+    
+    mlx_new_window(mlx, 800, 800, "so_long");
+    mlx_loop(mlx);
     // system("leaks so_long");
 }

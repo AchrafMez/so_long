@@ -60,7 +60,7 @@ int32_t main(void)
 	{
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
-	}
+	}   
 	if (!(image = mlx_new_image(mlx, 128, 128)))
 	{
 		mlx_close_window(mlx);
