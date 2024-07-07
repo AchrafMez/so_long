@@ -57,12 +57,12 @@ void check(char *line)
 {
     int x = 0;
     
-    printf("%s\n", line);
+    // printf("%s\n", line);
     while(line[x])
     {
         if(line[x] != '1' && line[x] != '0' && line[x] != 'C' && line[x] != 'E' && line[x] != 'P')
         {
-            printf("%c\n", line[x]);
+            // printf("%c\n", line[x]);
             ft_error();
         }
         x++;
@@ -111,6 +111,14 @@ void map_rectangular(char **map)
         len = ft_strlen(map[y]);
         x++;
     }
+    player_check(map);
+    while(map[y])
+    {
+        printf("%s\n", map[y]);
+        y++;
+    }
+    if(check_path(map) == 1)
+        ft_error();
     return ;
 }
 

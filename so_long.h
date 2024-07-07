@@ -10,16 +10,22 @@
 #include "./MLX42/include/MLX42/MLX42.h"
 
 typedef struct s_map{
+    char **map;
+    mlx_t *mlx;
+    mlx_image_t *img[5];
+    mlx_texture_t *texture[5];
+    int y;
+    int x;
     int player;
     int coins;
     int exit;
-    int lines;
-
 } t_map;
 
+void player_check(char **map);
 void map_rectangular(char **map);
+void flood_fill(char **map, int y, int x);
 void ft_error();
 char **ft_split(char *str, char c);
-
+int check_path(char **map);
 
 #endif

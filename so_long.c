@@ -117,9 +117,14 @@ void  ft_store(char *filename)
     ft_free(map, i);
     close(fd);
 }
-
+void test()
+{
+    system("leaks so_long");
+}
 int main(int ac, char **av)
 {
+    t_map mlx;
+    // atexit(test);
     char *filename = av[1];
     int fd = open(filename, O_RDONLY);
     if(ac != 2)
@@ -136,12 +141,14 @@ int main(int ac, char **av)
             // map_rectangular(fd, filename);
     }
     close(fd);
-    mlx_t *mlx;
     // int a = 0;
     // void *new_window;
-    mlx = mlx_init(800, 800, "so_long", true);
-    
-    mlx_new_window(mlx, 800, 800, "so_long");
-    mlx_loop(mlx);
-    // system("leaks so_long");
+    mlx.texture[0] = mlx_load_png("./solong_assists/wall.png") ;
+    mlx.mlx = mlx_init(800, 800, "so_long", true);
+    mlx.img[0] = mlx_texture_to_image(mlx.mlx, mlx.texture[0]);
+    mlx_image_to_window(mlx.mlx, mlx.img[0], 0, 0);
+
+    // mlx_new_window(mlx, 800, 800, "so_long");
+    mlx_loop(mlx.mlx);
+    //system("leaks so_long");
 }
