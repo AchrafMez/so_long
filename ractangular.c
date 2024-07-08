@@ -25,30 +25,31 @@ void ones_line(char *line)
 //     int c;
 // } t_info;
 
-int map_check(char **map)
+int map_check(t_map *mlx)
 {
     int x = 0;
     int y = 0;
-    int p = 0;
-    int c = 0;
-    int e = 0;
 
-    while(map[y])
+    while(mlx->map[y])
     {
         x = 0;
-        while(map[y][x])
+        while(mlx->map[y][x])
         {
-            if(map[y][x] == 'E')
-                e++;
-            else if(map[y][x] == 'C')
-                c++;
-            else if(map[y][x] == 'P')
-                p++;
+            if(mlx->map[y][x] == 'E')
+                mlx->exit++;
+            else if(mlx->map[y][x] == 'C')
+                mlx->coins++;
+            else if(mlx->map[y][x] == 'P')
+            {
+                mlx->player_y = y;
+                mlx->player_x = x;
+                mlx->player++;
+            }
             x++;
         }
         y++;
     }
-    if(c <= 0 || p <= 0 || p > 1 || e <= 0 || e > 1)
+    if(mlx->coins <= 0 || mlx->player <= 0 || mlx->player > 1 || mlx->exit <= 0 || mlx->exit > 1)
         return 1;
     else
         return 0;
@@ -69,55 +70,53 @@ void check(char *line)
     }
     return ;
 }
-void map_len(char **map)
+void map_len(t_map *mlx)
 {
     int y = 0;
-    int len = ft_strlen(map[y]);
+    int len = ft_strlen(mlx->map[y]);
     int len1 = 0;
-    while(map[y])
+    while(mlx->map[y])
     {
-        len1 = ft_strlen(map[y]);
-        if(len != ft_strlen(map[y]))
+        len1 = ft_strlen(mlx->map[y]);
+        if(len != ft_strlen(mlx->map[y]))
         {
             printf("something wrong with lines !\n");
             return ;
         }
-        else if(map[y][0] != '1')
+        else if(mlx->map[y][0] != '1')
             ft_error();
-        else if(map[y][len1-1] != '1')
+        else if(mlx->map[y][len1-1] != '1')
             ft_error();
-        check(map[y]);
+        check(mlx->map[y]);
         y++;
     }
-    ones_line(map[y - 1]);
-    if(map_check(map) == 1)
+    ones_line(mlx->map[y - 1]);
+    if(map_check(mlx) == 1)
         ft_error();
     else
         printf("lines are equal !\n");
     return ;
 }
 
-void map_rectangular(char **map)
+void map_rectangular(t_map *mlx)
 {
-    // t_map check;
     int y = 0;
     int x = 0;
     int len = 0;
-    // int len1;
-    ones_line(map[0]);
-    map_len(map);
-    while(map[y][x])
+    ones_line(mlx->map[0]);
+    map_len(mlx);
+    while(mlx->map[y][x])
     {
-        len = ft_strlen(map[y]);
+        len = ft_strlen(mlx->map[y]);
         x++;
     }
-    player_check(map);
-    while(map[y])
+    player_check(mlx->map);
+    while(mlx->map[y])
     {
-        printf("%s\n", map[y]);
+        printf("mlx map -> %s\n", mlx->map[y]);
         y++;
     }
-    if(check_path(map) == 1)
+    if(check_path(mlx->map) == 1)
         ft_error();
     return ;
 }

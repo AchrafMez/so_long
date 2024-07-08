@@ -14,15 +14,15 @@ typedef struct s_map{
     mlx_t *mlx;
     mlx_image_t *img[5];
     mlx_texture_t *texture[5];
-    int y;
-    int x;
+    int player_y;
+    int player_x;
     int player;
     int coins;
     int exit;
 } t_map;
 
 void player_check(char **map);
-void map_rectangular(char **map);
+void map_rectangular(t_map *mlx);
 void flood_fill(char **map, int y, int x);
 void ft_error();
 char **ft_split(char *str, char c);
