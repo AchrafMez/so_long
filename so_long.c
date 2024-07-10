@@ -88,7 +88,6 @@ int camp(char *filename)
 //     close(fd);
 // }
 
-
 void ft_just_store(char *filename, t_map *mlx)
 {
     int fd = open(filename, O_RDONLY);
@@ -154,30 +153,132 @@ void ft_put_floor(t_map *mlx)
     {
         while(mlx->map[y][x])
         {
-            mlx_image_to_window(mlx->mlx, mlx->img[0], y * 32, x * 32);
+            mlx_image_to_window(mlx->mlx, mlx->img[0], x * 32, y * 32);
             x++;
         }
         x = 0;
         y++;
     }
 }
+void move_up(t_map *mlx)
+{
+    printf("%d\n", mlx->player_y);
+    if(mlx->map[mlx->player_y - 1][mlx->player_x] != '1' && mlx->map[mlx->player_y - 1][mlx->player_x] != 'E')
+    {
+        if(mlx->map[mlx->player_y - 1][mlx->player_x] == 'C')
+        {
+            mlx->map[mlx->player_y - 1][mlx->player_x] = '0';
+            mlx->coins--;
+        }
+        mlx_image_to_window(mlx->mlx, mlx->img[0], mlx->player_x *32, mlx->player_y * 32);
+        mlx->player_y--;
+        mlx_image_to_window(mlx->mlx, mlx->img[2], mlx->player_x * 32, mlx->player_y * 32);
+    }
+    else if(mlx->coins == 0 && mlx->map[mlx->player_y - 1][mlx->player_x] == 'E')
+    {
+        printf("Yo hoo You Win !");
+        mlx_close_window(mlx->mlx);
+    }
+}
+
+void move_down(t_map *mlx)
+{
+    if(mlx->map[mlx->player_y + 1][mlx->player_x] != '1' && mlx->map[mlx->player_y + 1][mlx->player_x] != 'E')
+    {
+        if(mlx->map[mlx->player_y + 1][mlx->player_x] == 'C')
+        {
+            mlx->map[mlx->player_y + 1][mlx->player_x] = '0';
+            mlx->coins--;
+        }
+        mlx_image_to_window(mlx->mlx, mlx->img[0], mlx->player_x *32, mlx->player_y * 32);
+        mlx->player_y++;
+        mlx_image_to_window(mlx->mlx, mlx->img[2], mlx->player_x * 32, mlx->player_y * 32);
+    }
+    else if(mlx->coins == 0 && mlx->map[mlx->player_y + 1][mlx->player_x] == 'E')
+    {   
+        printf("Yo hoo You Win !");
+        mlx_close_window(mlx->mlx);
+    }
+    printf("%d\n", mlx->player_y);
+}
+void move_right(t_map *mlx)
+{
+    printf("%d\n", mlx->player_x);
+    if(mlx->map[mlx->player_y][mlx->player_x + 1] != '1' && mlx->map[mlx->player_y][mlx->player_x + 1] != 'E')
+    {
+        if(mlx->map[mlx->player_y][mlx->player_x + 1] == 'C')
+        {
+            mlx->map[mlx->player_y][mlx->player_x + 1] = '0';
+            mlx->coins--;
+        }
+        mlx_image_to_window(mlx->mlx, mlx->img[0], mlx->player_x *32, mlx->player_y * 32);
+        mlx->player_x++;
+        mlx_image_to_window(mlx->mlx, mlx->img[2], mlx->player_x * 32, mlx->player_y * 32);
+    }
+    else if(mlx->coins == 0 && mlx->map[mlx->player_y][mlx->player_x + 1] == 'E')
+    {
+        printf("Yo hoo You Win !");   
+        mlx_close_window(mlx->mlx);
+    }
+}
+
+void move_left(t_map *mlx)
+{
+    printf("%d\n", mlx->player_x);
+    if(mlx->map[mlx->player_y][mlx->player_x - 1] != '1' && mlx->map[mlx->player_y][mlx->player_x - 1] != 'E')
+    {
+        if(mlx->map[mlx->player_y][mlx->player_x - 1] == 'C')
+        {
+            mlx->map[mlx->player_y][mlx->player_x - 1] = '0';
+            mlx->coins--;
+        }
+        mlx_image_to_window(mlx->mlx, mlx->img[0], mlx->player_x *32, mlx->player_y * 32);
+        mlx->player_x--;
+        mlx_image_to_window(mlx->mlx, mlx->img[2], mlx->player_x * 32, mlx->player_y * 32);
+    }
+    else if(mlx->coins == 0 && mlx->map[mlx->player_y][mlx->player_x - 1] == 'E')
+    {
+        printf("Yo hoo You Win !");
+        mlx_close_window(mlx->mlx);
+    }
+}
 
 void key_press(struct mlx_key_data key_data, void *param)
 {
-    (void)param;
-    if(key_data.key == MLX_KEY_UP || key_data.key == MLX_KEY_W)
+    t_map *mlx = (t_map *)param;
+    if(((key_data.key == MLX_KEY_UP) || key_data.key == MLX_KEY_W) && key_data.action)
+    {
+        move_up(mlx);
         printf("up\n");
-    else if(key_data.key == MLX_KEY_DOWN || key_data.key == MLX_KEY_S)
+    }
+    else if((key_data.key == MLX_KEY_DOWN || key_data.key == MLX_KEY_S) && key_data.action)
+    {
+        move_down(mlx);
         printf("DOWN\n");
-    else if(key_data.key == MLX_KEY_RIGHT || key_data.key == MLX_KEY_D)
+    }
+    else if((key_data.key == MLX_KEY_RIGHT || key_data.key == MLX_KEY_D) && key_data.action)
+    {
+        move_right(mlx);
         printf("RIGHT\n");
-    else if(key_data.key == MLX_KEY_LEFT || key_data.key == MLX_KEY_A)
+    }
+    else if((key_data.key == MLX_KEY_LEFT || key_data.key == MLX_KEY_A) && key_data.action)
+    {
+        move_left(mlx);
         printf("LEFT\n");
-    // else if(key_data.key == MLX_KEY_ESCAPE)
-        // mlx_close_window();
+    }
+    else if(key_data.key == MLX_KEY_ESCAPE)
+    {
+        printf("destrory");
+        mlx_close_window(mlx->mlx);
+        // ft_free(mlx.map, 25);
+        // exit(1);
+    }
+    printf("coins -> %d\n", mlx->coins);
 }
 int main(int ac, char **av)
 {
+//     int tile_width;
+//     int tile_height;
     t_map mlx;
     // atexit(test);
     char *filename = av[1];
@@ -208,13 +309,18 @@ int main(int ac, char **av)
     // printf("exit -> %d\n", mlx.exit);
     // int a = 0;
     // void *new_window;
+    // tile_width = WIDTH / mlx.x;
+    // tile_height = HEIGHT / mlx.y;
+    // printf("tile width  - >%d\n", tile_width);
+    // printf("tile hegiht  - >%d\n", tile_height);
     mlx.texture[0] = mlx_load_png("./solong_assists/floor.png"); //flor
     mlx.texture[1] = mlx_load_png("./solong_assists/wall.png"); //wall
     mlx.texture[2] = mlx_load_png("./solong_assists/player.png"); //player
     mlx.texture[3] = mlx_load_png("./solong_assists/03.png"); //coin
     mlx.texture[4] = mlx_load_png("./solong_assists/exit.png"); //exit
-
-    mlx.mlx = mlx_init(800, 800, "so_long", true);
+    int WIDTH = mlx.x * 32;
+    int HEIGHT = mlx.y * 32;
+    mlx.mlx = mlx_init(WIDTH, HEIGHT, "so_long", false);
     mlx.img[0] = mlx_texture_to_image(mlx.mlx, mlx.texture[0]);
     mlx.img[1] = mlx_texture_to_image(mlx.mlx, mlx.texture[1]);
     mlx.img[2] = mlx_texture_to_image(mlx.mlx, mlx.texture[2]);
@@ -223,28 +329,32 @@ int main(int ac, char **av)
     int y = 0;
     int x = 0;
     ft_put_floor(&mlx);
+    // struct mlx_key_data key_data;
     while(mlx.map[y])
     {
         while(mlx.map[y][x])
         {
-            // if(mlx.map[y][x] == '0')
-            //     mlx_image_to_window(mlx.mlx, mlx.img[0], y * 32, x * 32);
-            if(mlx.map[y][x] == '1')
-                mlx_image_to_window(mlx.mlx, mlx.img[1], y * 32, x * 32);
-            if(mlx.map[y][x] == 'P')
-                mlx_image_to_window(mlx.mlx, mlx.img[2], y * 32, x * 32);
-            if(mlx.map[y][x] == 'C')
-                mlx_image_to_window(mlx.mlx, mlx.img[3], y * 32, x * 32);
-            if(mlx.map[y][x] == 'E')
-                mlx_image_to_window(mlx.mlx, mlx.img[4], y * 32, x * 32);
-            // mlx_image_to_window(mlx.mlx, mlx.img[1], 0, 1 *32);
+            if(mlx.map[y][x] == '0')
+                mlx_image_to_window(mlx.mlx, mlx.img[0], x * 32, y * 32);
+            else if(mlx.map[y][x] == '1')
+                mlx_image_to_window(mlx.mlx, mlx.img[1], x * 32, y * 32);
+            else if(mlx.map[y][x] == 'P')
+                mlx_image_to_window(mlx.mlx, mlx.img[2], x * 32, y * 32);
+            else if(mlx.map[y][x] == 'C')
+                mlx_image_to_window(mlx.mlx, mlx.img[3], x * 32, y * 32);
+            else if(mlx.map[y][x] == 'E')
+                mlx_image_to_window(mlx.mlx, mlx.img[4], x * 32, y * 32);
             x++;
         }
         x = 0;
         y++;
-
     }
-    mlx_key_hook(mlx.mlx, key_press, NULL);
+    mlx_key_hook(mlx.mlx, key_press, &mlx);
+    // if(key_data.key == MLX_KEY_ESCAPE)
+    // {
+        // printf("destroy");
+        // mlx_c lose_window(mlx.mlx);
+    // }
     // mlx_new_window(mlx, 800, 800, "so_long");
     mlx_loop(mlx.mlx);
     

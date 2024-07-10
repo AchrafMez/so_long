@@ -16,7 +16,7 @@ void player_check(char **map)
                 flood_fill(map, y, x);
                 return ;
             }
-            x++;
+                x++;
         }
         x = 0;
         y++;

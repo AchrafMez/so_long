@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ractangular.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/10 19:46:12 by amezioun          #+#    #+#             */
+/*   Updated: 2024/07/10 20:02:12 by amezioun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 // typedef struct s_map{
@@ -98,27 +110,27 @@ void map_len(t_map *mlx)
     return ;
 }
 
-void map_rectangular(t_map *mlx)
+int map_rectangular(t_map *mlx)
 {
-    int y = 0;
-    int x = 0;
+    mlx->x = 0;
+    mlx->y = 0;
     int len = 0;
     ones_line(mlx->map[0]);
     map_len(mlx);
-    while(mlx->map[y][x])
+    while(mlx->map[mlx->y][mlx->x])
     {
-        len = ft_strlen(mlx->map[y]);
-        x++;
+        len = ft_strlen(mlx->map[mlx->y]);
+        mlx->x++;
     }
     player_check(mlx->map);
-    while(mlx->map[y])
+    while(mlx->map[mlx->y])
     {
-        printf("mlx map -> %s\n", mlx->map[y]);
-        y++;
+        // printf("mlx map -> %s\n", mlx->map[mlx->y]);
+        mlx->y++;
     }
     if(check_path(mlx->map) == 1)
-        ft_error();
-    return ;
+        return 1;
+    return 0;
 }
 
 // int map_rectangular(int fd, char *filename)
