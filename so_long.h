@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/11 05:03:21 by amezioun          #+#    #+#             */
+/*   Updated: 2024/07/11 05:30:25 by amezioun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 #define SO_LONG_H
 
@@ -23,11 +35,34 @@ typedef struct s_map{
     int exit;
 } t_map;
 
-void player_check(char **map);
-int map_rectangular(t_map *mlx);
+//flood fill
 void flood_fill(char **map, int y, int x);
-void ft_error();
-char **ft_split(char *str, char c);
 int check_path(char **map);
+
+void player_check(char **map);
+void ft_error();
+int check_path(char **map);
+
+//rectangular
+void ones_line(char *line);
+int map_check(t_map *mlx);
+int check(char *line);
+int map_len(t_map *mlx);
+int map_rectangular(t_map *mlx);
+
+
+void ft_free(char **map, int i);
+void  ft_store(char *filename, t_map *mlx);
+int camp(char *filename);
+
+//ft_store
+void ft_just_store(char *filename, t_map *mlx);
+int map_lines(int fd, char *filename);
+
+//movements
+void move_up(t_map *mlx);
+void move_down(t_map *mlx);
+void move_right(t_map *mlx);
+void move_left(t_map *mlx);
 
 #endif

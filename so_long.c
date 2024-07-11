@@ -8,20 +8,7 @@ void ft_error()
     exit(1);
 }
 
-int map_lines(int fd, char *filename)
-{
-    int i = 0;
-    char *line = get_next_line(fd);
-    fd = open(filename, fd);
-    while(line != NULL)
-    {
-        free(line);
-        line = get_next_line(fd);
-        i++;
-    }
-    close(fd);
-    return i;
-}
+
 
 
 void ft_free(char **map, int i)
@@ -88,58 +75,7 @@ int camp(char *filename)
 //     close(fd);
 // }
 
-void ft_just_store(char *filename, t_map *mlx)
-{
-    int fd = open(filename, O_RDONLY);
-    if(fd <= 0 || !filename)
-        ft_error();
-    int maplines = map_lines(fd, filename);
-    close(fd);
-    fd = open(filename, O_RDONLY);
-    mlx->map = (char **)malloc(sizeof(char *) * (maplines + 1));
-    if(!mlx->map)
-        return ;
-    char *line = get_next_line(fd);
-    int line_len = 0;
-    int i = 0;
-    while(line)
-    {
-        line_len = ft_strlen(line);
-        mlx->map[i]= ft_strdup(line);
-        free(line);
-        line = get_next_line(fd);
-        i++;
-    }
-    mlx->map[i] = NULL;
-}
-void  ft_store(char *filename, t_map *mlx)
-{
-    int fd = open(filename, O_RDONLY);
-    if(fd <= 0 || !filename)
-        ft_error();
 
-    int maplines = map_lines(fd, filename);
-    close(fd);
-    fd = open(filename, O_RDONLY);
-    mlx->map = (char **)malloc(sizeof(char *) * (maplines + 1));
-    if(!mlx->map)
-        return ;
-    char *line = get_next_line(fd);
-    int line_len = 0;
-    int i = 0;
-    while(line)
-    {
-        line_len = ft_strlen(line);
-        mlx->map[i]= ft_strdup(line);
-        free(line);
-        line = get_next_line(fd);
-        i++;
-    }
-    mlx->map[i] = NULL;
-    map_rectangular(mlx);
-    ft_free(mlx->map, i);
-    close(fd);
-}
 void test()
 {
     system("leaks so_long");
@@ -160,88 +96,7 @@ void ft_put_floor(t_map *mlx)
         y++;
     }
 }
-void move_up(t_map *mlx)
-{
-    printf("%d\n", mlx->player_y);
-    if(mlx->map[mlx->player_y - 1][mlx->player_x] != '1' && mlx->map[mlx->player_y - 1][mlx->player_x] != 'E')
-    {
-        if(mlx->map[mlx->player_y - 1][mlx->player_x] == 'C')
-        {
-            mlx->map[mlx->player_y - 1][mlx->player_x] = '0';
-            mlx->coins--;
-        }
-        mlx_image_to_window(mlx->mlx, mlx->img[0], mlx->player_x *32, mlx->player_y * 32);
-        mlx->player_y--;
-        mlx_image_to_window(mlx->mlx, mlx->img[2], mlx->player_x * 32, mlx->player_y * 32);
-    }
-    else if(mlx->coins == 0 && mlx->map[mlx->player_y - 1][mlx->player_x] == 'E')
-    {
-        printf("Yo hoo You Win !");
-        mlx_close_window(mlx->mlx);
-    }
-}
 
-void move_down(t_map *mlx)
-{
-    if(mlx->map[mlx->player_y + 1][mlx->player_x] != '1' && mlx->map[mlx->player_y + 1][mlx->player_x] != 'E')
-    {
-        if(mlx->map[mlx->player_y + 1][mlx->player_x] == 'C')
-        {
-            mlx->map[mlx->player_y + 1][mlx->player_x] = '0';
-            mlx->coins--;
-        }
-        mlx_image_to_window(mlx->mlx, mlx->img[0], mlx->player_x *32, mlx->player_y * 32);
-        mlx->player_y++;
-        mlx_image_to_window(mlx->mlx, mlx->img[2], mlx->player_x * 32, mlx->player_y * 32);
-    }
-    else if(mlx->coins == 0 && mlx->map[mlx->player_y + 1][mlx->player_x] == 'E')
-    {   
-        printf("Yo hoo You Win !");
-        mlx_close_window(mlx->mlx);
-    }
-    printf("%d\n", mlx->player_y);
-}
-void move_right(t_map *mlx)
-{
-    printf("%d\n", mlx->player_x);
-    if(mlx->map[mlx->player_y][mlx->player_x + 1] != '1' && mlx->map[mlx->player_y][mlx->player_x + 1] != 'E')
-    {
-        if(mlx->map[mlx->player_y][mlx->player_x + 1] == 'C')
-        {
-            mlx->map[mlx->player_y][mlx->player_x + 1] = '0';
-            mlx->coins--;
-        }
-        mlx_image_to_window(mlx->mlx, mlx->img[0], mlx->player_x *32, mlx->player_y * 32);
-        mlx->player_x++;
-        mlx_image_to_window(mlx->mlx, mlx->img[2], mlx->player_x * 32, mlx->player_y * 32);
-    }
-    else if(mlx->coins == 0 && mlx->map[mlx->player_y][mlx->player_x + 1] == 'E')
-    {
-        printf("Yo hoo You Win !");   
-        mlx_close_window(mlx->mlx);
-    }
-}
-
-void move_left(t_map *mlx)
-{
-    printf("%d\n", mlx->player_x);
-    if(mlx->map[mlx->player_y][mlx->player_x - 1] != '1' && mlx->map[mlx->player_y][mlx->player_x - 1] != 'E')
-    {
-        if(mlx->map[mlx->player_y][mlx->player_x - 1] == 'C')
-        {
-            mlx->map[mlx->player_y][mlx->player_x - 1] = '0';
-            mlx->coins--;
-        }
-        mlx_image_to_window(mlx->mlx, mlx->img[0], mlx->player_x *32, mlx->player_y * 32);
-        mlx->player_x--;
-        mlx_image_to_window(mlx->mlx, mlx->img[2], mlx->player_x * 32, mlx->player_y * 32);
-    }
-    else if(mlx->coins == 0 && mlx->map[mlx->player_y][mlx->player_x - 1] == 'E')
-    {
-        printf("Yo hoo You Win !");
-        mlx_close_window(mlx->mlx);
-    }
-}
 
 void key_press(struct mlx_key_data key_data, void *param)
 {
@@ -277,10 +132,7 @@ void key_press(struct mlx_key_data key_data, void *param)
 }
 int main(int ac, char **av)
 {
-//     int tile_width;
-//     int tile_height;
     t_map mlx;
-    // atexit(test);
     char *filename = av[1];
     int fd = open(filename, O_RDONLY);
     if(ac != 2)
@@ -294,9 +146,27 @@ int main(int ac, char **av)
         }
         else
         {
-
+            int j = 0;
             ft_store(filename, &mlx);
             ft_just_store(filename, &mlx);
+            player_check(mlx.map);
+
+             while(mlx.map[j])
+                {
+                    printf("%s", mlx.map[j]);
+                    j++;
+                }
+            if(check_path(mlx.map) == 1)
+            {
+                printf("check path error");
+                exit(1);
+            }
+            printf("mlx y%d\n", mlx.y);
+            // ft_free(mlx.map, mlx.y-1);
+            ft_just_store(filename, &mlx);
+            // mlx.map[0] = NULL;
+        //     if(player_check(mlx.map) == 1)
+        //         ft_error();
         }
             // printf("exit -> %d\n", mlx.);
             // map_rectangular(fd, filename);
@@ -357,6 +227,6 @@ int main(int ac, char **av)
     // }
     // mlx_new_window(mlx, 800, 800, "so_long");
     mlx_loop(mlx.mlx);
-    
-    // system("leaks so_long");
+    ft_free(mlx.map, y);
+    system("leaks so_long");
 }
