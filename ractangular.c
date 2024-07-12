@@ -6,7 +6,7 @@
 /*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 19:46:12 by amezioun          #+#    #+#             */
-/*   Updated: 2024/07/11 07:39:26 by amezioun         ###   ########.fr       */
+/*   Updated: 2024/07/12 17:47:49 by amezioun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int map_check(t_map *mlx)
     mlx->exit = 0;
     mlx->player_x = 0;
     mlx->player_y = 0;
+    mlx->coins = 0;
     
     while(mlx->map[y])
     {
@@ -108,13 +109,13 @@ int map_rectangular(t_map *mlx)
         // len = ft_strlen(mlx->map[mlx->y]);
         mlx->x++;
     }
-    player_check(mlx->map);
+    // player_check(mlx->map);
     while(mlx->map[mlx->y])
     {
         // printf("mlx map -> %s\n", mlx->map[mlx->y]);
         mlx->y++;
     }
-    if(check_path(mlx->map) == 1)
-        return 1;
+    // if(check_path(mlx->map) == 1)
+    //     return 1;
     return 0;
 }

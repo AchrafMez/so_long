@@ -6,7 +6,7 @@
 /*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 05:03:21 by amezioun          #+#    #+#             */
-/*   Updated: 2024/07/11 05:30:25 by amezioun         ###   ########.fr       */
+/*   Updated: 2024/07/12 17:41:35 by amezioun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_map{
     mlx_texture_t *texture[5];
     int x;
     int y;
+    int exit_y;
+    int exit_x;
     int player_y;
     int player_x;
     int player;

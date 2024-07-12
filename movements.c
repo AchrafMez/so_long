@@ -6,7 +6,7 @@
 /*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 05:16:42 by amezioun          #+#    #+#             */
-/*   Updated: 2024/07/11 05:17:37 by amezioun         ###   ########.fr       */
+/*   Updated: 2024/07/12 18:07:20 by amezioun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void move_up(t_map *mlx)
 {
     printf("%d\n", mlx->player_y);
-    if(mlx->map[mlx->player_y - 1][mlx->player_x] != '1' && mlx->map[mlx->player_y - 1][mlx->player_x] != 'E')
+    if(mlx->map[mlx->player_y - 1][mlx->player_x] != '1' && mlx->map[mlx->player_y - 1][mlx->player_x] != '1')
     {
         if(mlx->map[mlx->player_y - 1][mlx->player_x] == 'C')
         {
@@ -25,6 +25,13 @@ void move_up(t_map *mlx)
         mlx_image_to_window(mlx->mlx, mlx->img[0], mlx->player_x *32, mlx->player_y * 32);
         mlx->player_y--;
         mlx_image_to_window(mlx->mlx, mlx->img[2], mlx->player_x * 32, mlx->player_y * 32);
+    }
+    else if(mlx->map[mlx->player_y - 1][mlx->player_x] == 'E')
+    {
+        mlx->map[mlx->player_y + 1][mlx->player_x] = 'E';
+        printf("y:  x:%d %d\n", mlx->player_y, mlx->player_x);
+        mlx_image_to_window(mlx->mlx, mlx->img[4], mlx->player_x *32, mlx->player_y * 32);
+        mlx->player_y--;
     }
     else if(mlx->coins == 0 && mlx->map[mlx->player_y - 1][mlx->player_x] == 'E')
     {
@@ -77,7 +84,7 @@ void move_right(t_map *mlx)
 void move_left(t_map *mlx)
 {
     printf("%d\n", mlx->player_x);
-    if(mlx->map[mlx->player_y][mlx->player_x - 1] != '1' && mlx->map[mlx->player_y][mlx->player_x - 1] != 'E')
+    if(mlx->map[mlx->player_y][mlx->player_x - 1] != '1' && mlx->map[mlx->player][mlx->player_x - 1] != 'E')
     {
         if(mlx->map[mlx->player_y][mlx->player_x - 1] == 'C')
         {
@@ -88,6 +95,18 @@ void move_left(t_map *mlx)
         mlx->player_x--;
         mlx_image_to_window(mlx->mlx, mlx->img[2], mlx->player_x * 32, mlx->player_y * 32);
     }
+    // if(mlx->map[mlx->player_y][mlx->player_x] == 'E' && mlx->coins != 0)
+    // {
+    //     mlx->map[mlx->player_y][mlx->player_x - 1] = 'E';
+    //     mlx_image_to_window(mlx->mlx, mlx->img[0], mlx->player_x *32, mlx->player_y * 32);
+    //     mlx->player--;
+    //     mlx_image_to_window(mlx->mlx, mlx->img[4], mlx->player_x * 32, mlx->player_y * 32); 
+    // }
+    // else if(mlx->map[mlx->player_y][mlx->player_x - 1] != '1' && mlx->map[mlx->player_y][mlx->player_x - 1] == 'E')
+    // {
+    //     mlx->map[mlx->player_y][mlx->player_x] = 'E';
+    //     mlx_image_to_window(mlx->mlx, mlx->img[4], mlx->player_x *32, mlx->player_y * 32);
+    // }
     else if(mlx->coins == 0 && mlx->map[mlx->player_y][mlx->player_x - 1] == 'E')
     {
         printf("Yo hoo You Win !");

@@ -1,6 +1,7 @@
 #include <string.h>
 #include "so_long.h"
 #include "MLX42/include/MLX42/MLX42.h"
+#include <stdlib.h>
 
 void ft_error()
 {
@@ -15,6 +16,7 @@ void ft_free(char **map, int i)
 {
     while(i--)
         free(map[i]);
+
     free(map);
 }
 
@@ -148,41 +150,37 @@ int main(int ac, char **av)
         {
             int j = 0;
             ft_store(filename, &mlx);
-            ft_just_store(filename, &mlx);
+            // ft_just_store(filename, &mlx);
+            printf("x -> %d\n", mlx.x);
+            printf("y -> %d\n", mlx.y);
             player_check(mlx.map);
-
-             while(mlx.map[j])
-                {
-                    printf("%s", mlx.map[j]);
-                    j++;
-                }
             if(check_path(mlx.map) == 1)
             {
-                printf("check path error");
+                ft_free(mlx.map, mlx.y);
+                printf("Error: the map provided doesnt have a valid path");
                 exit(1);
             }
-            printf("mlx y%d\n", mlx.y);
-            // ft_free(mlx.map, mlx.y-1);
-            ft_just_store(filename, &mlx);
-            // mlx.map[0] = NULL;
-        //     if(player_check(mlx.map) == 1)
-        //         ft_error();
-        }
+            while(mlx.map[j])
+            {
+                printf("[main]: line: %s\n", mlx.map[j]);
+                j++;
+            }
+            // ft_free(mlx.map, mlx.y);
+            // j = 0;
+            // while(mlx.map[j])
+            // {
+            //     printf("%s\n", mlx.map[j]);
+            //     j++;
+            // }
+
+            ft_store(filename, &mlx);
+            // ft_just_store(filename, &mlx);
+                
+            }
             // printf("exit -> %d\n", mlx.);
             // map_rectangular(fd, filename);
     }
     close(fd);
-    // printf("player x -> %d\n", mlx.player_x);
-    // printf("player y -> %d\n", mlx.player_y);
-    // printf("player -> %d\n", mlx.player);
-    // printf("coins -> %d\n", mlx.coins);
-    // printf("exit -> %d\n", mlx.exit);
-    // int a = 0;
-    // void *new_window;
-    // tile_width = WIDTH / mlx.x;
-    // tile_height = HEIGHT / mlx.y;
-    // printf("tile width  - >%d\n", tile_width);
-    // printf("tile hegiht  - >%d\n", tile_height);
     mlx.texture[0] = mlx_load_png("./solong_assists/floor.png"); //flor
     mlx.texture[1] = mlx_load_png("./solong_assists/wall.png"); //wall
     mlx.texture[2] = mlx_load_png("./solong_assists/player.png"); //player
@@ -198,6 +196,12 @@ int main(int ac, char **av)
     mlx.img[4] = mlx_texture_to_image(mlx.mlx, mlx.texture[4]);
     int y = 0;
     int x = 0;
+    int k = 0;
+            while(mlx.map[k])
+            {
+                printf("map before put floor -> %s\n", mlx.map[k]);
+                k++;
+            }
     ft_put_floor(&mlx);
     // struct mlx_key_data key_data;
     while(mlx.map[y])
@@ -228,5 +232,6 @@ int main(int ac, char **av)
     // mlx_new_window(mlx, 800, 800, "so_long");
     mlx_loop(mlx.mlx);
     ft_free(mlx.map, y);
-    system("leaks so_long");
+    // atexit(test);
+    // system("leaks so_long");
 }

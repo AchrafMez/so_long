@@ -6,13 +6,13 @@ void player_check(char **map)
 {
     int x = 0;
     int y = 0;
+
     while(map[y][x])
     {
         while(map[y][x])
         {
             if(map[y][x] == 'P')
             {
-                printf("%d %d\n", y, x);
                 flood_fill(map, y, x);
                 return ;
             }
