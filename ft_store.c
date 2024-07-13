@@ -58,10 +58,11 @@ void  ft_store(char *filename, t_map *mlx)
     {
         line_len = ft_strlen(line);
         mlx->map[i]= line;
-        printf("line: %s\n", mlx->map[i]);
         line = get_next_line(fd);
         i++;
+        // free(line);
     }
+    // free(line);
     mlx->map[i] = NULL;
     map_rectangular(mlx);
     close(fd);

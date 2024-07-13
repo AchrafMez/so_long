@@ -10,8 +10,6 @@ void ft_error()
 }
 
 
-
-
 void ft_free(char **map, int i)
 {
     while(i--)
@@ -99,7 +97,14 @@ void ft_put_floor(t_map *mlx)
     }
 }
 
-
+void delete_texture(t_map *mlx)
+{
+    int i = 4;
+    while(i >= 0)
+    {
+    mlx_delete_texture(mlx->texture[i--]);
+    }
+}
 void key_press(struct mlx_key_data key_data, void *param)
 {
     t_map *mlx = (t_map *)param;
@@ -126,12 +131,16 @@ void key_press(struct mlx_key_data key_data, void *param)
     else if(key_data.key == MLX_KEY_ESCAPE)
     {
         printf("destrory");
-        mlx_close_window(mlx->mlx);
-        // ft_free(mlx.map, 25);
+        // ft_free(mlx->map, mlx->y);
+        // delete_texture(mlx);
+        if(mlx->mlx != NULL){
+            mlx_close_window(mlx->mlx);
+            mlx->mlx = NULL;
+        }
         // exit(1);
     }
-    printf("coins -> %d\n", mlx->coins);
 }
+
 int main(int ac, char **av)
 {
     t_map mlx;
@@ -150,7 +159,6 @@ int main(int ac, char **av)
         {
             int j = 0;
             ft_store(filename, &mlx);
-            // ft_just_store(filename, &mlx);
             printf("x -> %d\n", mlx.x);
             printf("y -> %d\n", mlx.y);
             player_check(mlx.map);
@@ -165,20 +173,9 @@ int main(int ac, char **av)
                 printf("[main]: line: %s\n", mlx.map[j]);
                 j++;
             }
-            // ft_free(mlx.map, mlx.y);
-            // j = 0;
-            // while(mlx.map[j])
-            // {
-            //     printf("%s\n", mlx.map[j]);
-            //     j++;
-            // }
-
+            ft_free(mlx.map, mlx.y);
             ft_store(filename, &mlx);
-            // ft_just_store(filename, &mlx);
-                
             }
-            // printf("exit -> %d\n", mlx.);
-            // map_rectangular(fd, filename);
     }
     close(fd);
     mlx.texture[0] = mlx_load_png("./solong_assists/floor.png"); //flor
@@ -194,6 +191,7 @@ int main(int ac, char **av)
     mlx.img[2] = mlx_texture_to_image(mlx.mlx, mlx.texture[2]);
     mlx.img[3] = mlx_texture_to_image(mlx.mlx, mlx.texture[3]);
     mlx.img[4] = mlx_texture_to_image(mlx.mlx, mlx.texture[4]);
+    
     int y = 0;
     int x = 0;
     int k = 0;
@@ -203,12 +201,14 @@ int main(int ac, char **av)
                 k++;
             }
     ft_put_floor(&mlx);
-    // struct mlx_key_data key_data;
+    get_e(&mlx);
     while(mlx.map[y])
     {
         while(mlx.map[y][x])
         {
-            if(mlx.map[y][x] == '0')
+            if(mlx.map[y][x] == 'E')
+                mlx_image_to_window(mlx.mlx, mlx.img[4], x * 32, y * 32);
+            else if(mlx.map[y][x] == '0')
                 mlx_image_to_window(mlx.mlx, mlx.img[0], x * 32, y * 32);
             else if(mlx.map[y][x] == '1')
                 mlx_image_to_window(mlx.mlx, mlx.img[1], x * 32, y * 32);
@@ -216,22 +216,16 @@ int main(int ac, char **av)
                 mlx_image_to_window(mlx.mlx, mlx.img[2], x * 32, y * 32);
             else if(mlx.map[y][x] == 'C')
                 mlx_image_to_window(mlx.mlx, mlx.img[3], x * 32, y * 32);
-            else if(mlx.map[y][x] == 'E')
-                mlx_image_to_window(mlx.mlx, mlx.img[4], x * 32, y * 32);
             x++;
         }
         x = 0;
         y++;
     }
     mlx_key_hook(mlx.mlx, key_press, &mlx);
-    // if(key_data.key == MLX_KEY_ESCAPE)
-    // {
-        // printf("destroy");
-        // mlx_c lose_window(mlx.mlx);
-    // }
-    // mlx_new_window(mlx, 800, 800, "so_long");
     mlx_loop(mlx.mlx);
+    printf("map line: %d\n", y);
     ft_free(mlx.map, y);
-    // atexit(test);
+    atexit(test);
+    delete_texture(&mlx);
     // system("leaks so_long");
 }

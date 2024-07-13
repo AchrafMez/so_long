@@ -6,7 +6,7 @@
 /*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 05:03:21 by amezioun          #+#    #+#             */
-/*   Updated: 2024/07/12 17:41:35 by amezioun         ###   ########.fr       */
+/*   Updated: 2024/07/13 03:39:25 by amezioun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,5 @@ void move_up(t_map *mlx);
 void move_down(t_map *mlx);
 void move_right(t_map *mlx);
 void move_left(t_map *mlx);
-
+void get_e(t_map *mlx);
 #endif
