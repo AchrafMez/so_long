@@ -6,11 +6,17 @@
 /*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 23:30:39 by amezioun          #+#    #+#             */
-/*   Updated: 2024/07/13 23:47:43 by amezioun         ###   ########.fr       */
+/*   Updated: 2024/07/14 00:37:24 by amezioun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	ft_camp_error(void)
+{
+	write(2, "map name Error!\n", 16);
+	exit(1);
+}
 
 void	delete_texture(t_map *mlx)
 {

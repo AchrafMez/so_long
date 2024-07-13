@@ -6,7 +6,7 @@
 /*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 23:59:54 by amezioun          #+#    #+#             */
-/*   Updated: 2024/07/14 00:30:55 by amezioun         ###   ########.fr       */
+/*   Updated: 2024/07/14 00:36:25 by amezioun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int ac, char **av)
 	}
 	filename = av[1];
 	if (camp(filename) == -1)
-		ft_error(&mlx);
+		ft_camp_error();
 	treat(filename, &mlx);
 	load_png(&mlx);
 	mlx.width = mlx.x * 32;

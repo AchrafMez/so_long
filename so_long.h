@@ -6,16 +6,16 @@
 /*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 05:03:21 by amezioun          #+#    #+#             */
-/*   Updated: 2024/07/14 00:20:35 by amezioun         ###   ########.fr       */
+/*   Updated: 2024/07/14 00:37:04 by amezioun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "/Users/amezioun/MLX42/include/MLX42/MLX42.h"
 # include "./ft_print/ft_printf.h"
 # include "./getnextline/get_next_line.h"
+# include "/Users/amezioun/MLX42/include/MLX42/MLX42.h"
 # include <stdlib.h>
 # include <unistd.h>
 
@@ -85,6 +85,7 @@ void				move_left(t_map *mlx);
 void				key_press(struct mlx_key_data key_data, void *param);
 
 //exit
+void				ft_camp_error(void);
 void				delete_texture(t_map *mlx);
 void				ft_error_free(t_map *mlx);
 void				ft_error(t_map *mlx);
