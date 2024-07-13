@@ -26,11 +26,9 @@ void ft_just_store(char *filename, t_map *mlx)
     if(!mlx->map)
         return ;
     char *line = get_next_line(fd);
-    int line_len = 0;
     int i = 0;
     while(line)
     {
-        line_len = ft_strlen(line);
         mlx->map[i]= ft_strdup(line);
         free(line);
         line = get_next_line(fd);
@@ -52,11 +50,11 @@ void  ft_store(char *filename, t_map *mlx)
     if(!mlx->map)
         return ;
     char *line = get_next_line(fd);
-    int line_len = 0;
+    // int line_len = 0;
     int i = 0;
     while(line)
     {
-        line_len = ft_strlen(line);
+        // line_len = ft_strlen(line);
         mlx->map[i]= line;
         line = get_next_line(fd);
         i++;

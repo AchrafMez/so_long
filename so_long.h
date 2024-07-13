@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: captain <captain@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 05:03:21 by amezioun          #+#    #+#             */
-/*   Updated: 2024/07/13 03:39:25 by amezioun         ###   ########.fr       */
+/*   Updated: 2024/07/13 09:57:03 by captain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct s_map{
     mlx_t *mlx;
     mlx_image_t *img[5];
     mlx_texture_t *texture[5];
+    int WIDTH;
+    int HEIGHT;
     int x;
     int y;
     int exit_y;
