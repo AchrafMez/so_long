@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: captain <captain@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 05:03:21 by amezioun          #+#    #+#             */
-/*   Updated: 2024/07/13 09:57:03 by captain          ###   ########.fr       */
+/*   Updated: 2024/07/13 21:37:39 by amezioun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_map{
     int player;
     int coins;
     int exit;
+    int moves;
 } t_map;
 
 //flood fill
@@ -44,11 +45,11 @@ void flood_fill(char **map, int y, int x);
 int check_path(char **map);
 
 void player_check(char **map);
-void ft_error();
+void ft_error(t_map *mlx);
 int check_path(char **map);
 
 //rectangular
-void ones_line(char *line);
+void ones_line(t_map *mlx, int y);
 int map_check(t_map *mlx);
 int check(char *line);
 int map_len(t_map *mlx);

@@ -19,7 +19,10 @@ void ft_just_store(char *filename, t_map *mlx)
 {
     int fd = open(filename, O_RDONLY);
     if(fd <= 0 || !filename)
-        ft_error();
+    {
+        write(2, "Error\n", 7);
+        exit(1);
+    }
     int maplines = map_lines(fd, filename);
     fd = open(filename, O_RDONLY);
     mlx->map = (char **)malloc(sizeof(char *) * (maplines));
