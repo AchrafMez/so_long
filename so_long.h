@@ -6,16 +6,16 @@
 /*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 05:03:21 by amezioun          #+#    #+#             */
-/*   Updated: 2024/07/14 00:01:07 by amezioun         ###   ########.fr       */
+/*   Updated: 2024/07/14 00:20:35 by amezioun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "./MLX42/include/MLX42/MLX42.h"
+# include "/Users/amezioun/MLX42/include/MLX42/MLX42.h"
 # include "./ft_print/ft_printf.h"
-# include "getnextline/get_next_line.h"
+# include "./getnextline/get_next_line.h"
 # include <stdlib.h>
 # include <unistd.h>
 

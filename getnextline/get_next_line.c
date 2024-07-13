@@ -6,7 +6,7 @@
 /*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:12:39 by amezioun          #+#    #+#             */
-/*   Updated: 2024/07/14 00:05:45 by amezioun         ###   ########.fr       */
+/*   Updated: 2024/07/14 00:28:53 by amezioun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ char	*get_next_line(int fd)
 	static char	*sbuff;
 	char		*line;
 
-	sbuff = NULL;
 	buffer = NULL;
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
@@ -72,6 +71,8 @@ char	*get_next_line(int fd)
 		buffer = NULL;
 		return (NULL);
 	}
+	if (BUFFER_SIZE <= 0)
+		return (NULL);
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
