@@ -6,7 +6,7 @@
 /*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 05:16:42 by amezioun          #+#    #+#             */
-/*   Updated: 2024/07/13 21:15:23 by amezioun         ###   ########.fr       */
+/*   Updated: 2024/07/13 23:59:16 by amezioun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,12 @@ void	get_e(t_map *mlx)
 	}
 }
 
-void	ft_put_exit(t_map *mlx)
-{
-	mlx_image_to_window(mlx->mlx, mlx->img[4], mlx->exit_x * 32, mlx->exit_y
-		* 32);
-}
-
 void	move_up(t_map *mlx)
 {
 	if (mlx->map[mlx->player_y - 1][mlx->player_x] != '1')
 	{
-		printf("moves: %d\n", mlx->moves);
-        mlx->moves += 1;
+		ft_printf("moves: %d\n", mlx->moves);
+		mlx->moves += 1;
 		if (mlx->map[mlx->player_y - 1][mlx->player_x] == 'C'
 			&& mlx->map[mlx->player_y - 1][mlx->player_x] != 'E')
 		{
@@ -61,15 +55,18 @@ void	move_up(t_map *mlx)
 			mlx->player_y * 32);
 	}
 	if (mlx->coins == 0 && mlx->map[mlx->player_y][mlx->player_x] == 'E')
+	{
+		ft_printf("YooHoo You win!");
 		mlx_close_window(mlx->mlx);
+	}
 }
 
 void	move_down(t_map *mlx)
 {
 	if (mlx->map[mlx->player_y + 1][mlx->player_x] != '1')
 	{
-		printf("moves: %d\n", mlx->moves);
-        mlx->moves += 1;
+		ft_printf("moves: %d\n", mlx->moves);
+		mlx->moves += 1;
 		if (mlx->map[mlx->player_y + 1][mlx->player_x] == 'C'
 			&& mlx->map[mlx->player_y + 1][mlx->player_x] != 'E')
 		{
@@ -84,15 +81,18 @@ void	move_down(t_map *mlx)
 			mlx->player_y * 32);
 	}
 	if (mlx->coins == 0 && mlx->map[mlx->player_y][mlx->player_x] == 'E')
+	{
+		ft_printf("YooHoo You win!");
 		mlx_close_window(mlx->mlx);
+	}
 }
 
 void	move_right(t_map *mlx)
 {
 	if (mlx->map[mlx->player_y][mlx->player_x + 1] != '1')
 	{
-		printf("moves: %d\n", mlx->moves);
-        mlx->moves += 1;
+		ft_printf("moves: %d\n", mlx->moves);
+		mlx->moves += 1;
 		if (mlx->map[mlx->player_y][mlx->player_x + 1] == 'C'
 			&& mlx->map[mlx->player_y][mlx->player_x + 1] != 'E')
 		{
@@ -107,15 +107,18 @@ void	move_right(t_map *mlx)
 			mlx->player_y * 32);
 	}
 	if (mlx->coins == 0 && mlx->map[mlx->player_y][mlx->player_x] == 'E')
+	{
+		ft_printf("YooHoo You win!");
 		mlx_close_window(mlx->mlx);
+	}
 }
 
 void	move_left(t_map *mlx)
 {
 	if (mlx->map[mlx->player_y][mlx->player_x - 1] != '1')
 	{
-		printf("moves: %d\n", mlx->moves);
-        mlx->moves += 1;
+		ft_printf("moves: %d\n", mlx->moves);
+		mlx->moves += 1;
 		if (mlx->map[mlx->player_y][mlx->player_x - 1] == 'C'
 			&& mlx->map[mlx->player][mlx->player_x - 1] != 'E')
 		{
@@ -130,5 +133,8 @@ void	move_left(t_map *mlx)
 			mlx->player_y * 32);
 	}
 	if (mlx->coins == 0 && mlx->map[mlx->player_y][mlx->player_x] == 'E')
+	{
+		ft_printf("YooHoo You win!");
 		mlx_close_window(mlx->mlx);
+	}
 }

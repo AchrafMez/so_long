@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: captain <captain@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:12:43 by amezioun          #+#    #+#             */
-/*   Updated: 2024/07/13 09:36:02 by captain          ###   ########.fr       */
+/*   Updated: 2024/07/14 00:07:16 by amezioun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ char	*copy_until_nl(char *sbuff)
 		return (NULL);
 	while (sbuff[i] && sbuff[i] != '\n')
 		i++;
-	// if (sbuff[i] && sbuff[i] == '\n')
-	// 	i += 1;
 	cunl = malloc(i + 1);
 	if (!cunl)
 		return (NULL);
@@ -98,9 +96,6 @@ char	*copy_until_nl(char *sbuff)
 		cunl[i] = sbuff[i];
 		i++;
 	}
-	// if (sbuff && sbuff[i] == '\n')
-	// 	cunl[i] = '\0';
-	// else
 	cunl[i] = '\0';
 	i++;
 	return (cunl);

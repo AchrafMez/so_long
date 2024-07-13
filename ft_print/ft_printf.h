@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/06 10:24:44 by amezioun          #+#    #+#             */
-/*   Updated: 2024/07/14 00:06:42 by amezioun         ###   ########.fr       */
+/*   Created: 2024/01/27 16:39:41 by amezioun          #+#    #+#             */
+/*   Updated: 2024/07/13 23:00:34 by amezioun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
-# endif
-
-# include <fcntl.h>
-# include <stdlib.h>
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+# include <stdarg.h>
 # include <unistd.h>
 
-char	*ft_read(int fd, char *sbuff, char *buffer);
-char	*get_next_line(int fd);
-int		ft_strlen(char *s);
-char	*ft_strdup(char *s);
-char	*ft_strjoin(char *s1, char *s2);
-int		contains_nl(char *sbuff);
-char	*copy_until_nl(char *sbuff);
-char	*copy_after_nl(char *in);
+int	ft_printf(const char *format, ...);
+int	ft_print_format(char specifier, va_list ap);
+int	ft_putchar(int c);
+int	ft_putstr(char *str);
+int	ft_putnbr_hexa(unsigned long n, char specifier);
+int	ft_putnbr(long n);
 
 #endif

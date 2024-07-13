@@ -6,7 +6,7 @@
 /*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:12:39 by amezioun          #+#    #+#             */
-/*   Updated: 2024/06/26 13:09:13 by amezioun         ###   ########.fr       */
+/*   Updated: 2024/07/14 00:05:45 by amezioun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	ft_strlen(char *s)
 
 char	*ft_read(int fd, char *sbuff, char *buffer)
 {
-
 	int	bytes_read;
+
 	bytes_read = BUFFER_SIZE;
 	if ((!sbuff && !buffer) || fd < 0)
 		return (NULL);
@@ -58,21 +58,20 @@ char	*ft_read(int fd, char *sbuff, char *buffer)
 char	*get_next_line(int fd)
 {
 	char		*buffer;
-	static char	*sbuff = NULL;
+	static char	*sbuff;
 	char		*line;
 
+	sbuff = NULL;
 	buffer = NULL;
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
 	{
 		free(sbuff);
-		free (buffer);
-		buffer = NULL;
+		free(buffer);
 		sbuff = NULL;
+		buffer = NULL;
 		return (NULL);
 	}
-	if (BUFFER_SIZE <= 0)
-		return (NULL);
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
@@ -83,18 +82,3 @@ char	*get_next_line(int fd)
 	sbuff = copy_after_nl(sbuff);
 	return (line);
 }
-// int main()
-// {
-// 	// char *filename = "map.ber";
-	// int fd = open("map.ber", O_RDONLY);
-	// char *line = get_next_line(fd);
-// 	char *line2 = get_next_line(fd);
-// 	char *line3 = get_next_line(fd);
-// 	char *line4 = get_next_line(fd);
-// 	char *line5 = get_next_line(fd);
-	// printf("%s", line);
-// 	printf("%s", line2);
-// 	printf("%s", line3);
-// 	printf("%s", line4);
-// 	printf("%s", line5);
-// }
