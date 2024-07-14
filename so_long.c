@@ -6,7 +6,7 @@
 /*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 23:59:54 by amezioun          #+#    #+#             */
-/*   Updated: 2024/07/14 00:36:25 by amezioun         ###   ########.fr       */
+/*   Updated: 2024/07/14 02:04:51 by amezioun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,4 @@ int	main(int ac, char **av)
 	mlx_loop(mlx.mlx);
 	ft_free(mlx.map, mlx.y);
 	delete_texture(&mlx);
-	atexit(test);
 }

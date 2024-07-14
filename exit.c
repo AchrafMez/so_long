@@ -6,7 +6,7 @@
 /*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 23:30:39 by amezioun          #+#    #+#             */
-/*   Updated: 2024/07/14 00:37:24 by amezioun         ###   ########.fr       */
+/*   Updated: 2024/07/14 01:45:39 by amezioun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_error_free(t_map *mlx)
 
 void	ft_error(t_map *mlx)
 {
-	write(2, "Error adsf\n", 11);
+	write(2, "Error\n", 6);
 	ft_error_free(mlx);
 	exit(1);
 }

@@ -6,11 +6,17 @@
 /*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 23:48:40 by amezioun          #+#    #+#             */
-/*   Updated: 2024/07/13 23:55:22 by amezioun         ###   ########.fr       */
+/*   Updated: 2024/07/14 01:34:54 by amezioun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	empty_map(void)
+{
+	ft_printf("The map is empty");
+	exit(1);
+}
 
 int	map_lines(int fd, char *filename)
 {
@@ -43,6 +49,8 @@ void	ft_store(char *filename, t_map *mlx)
 	if (!mlx->map)
 		return ;
 	line = get_next_line(fd);
+	if (!line)
+		empty_map();
 	i = 0;
 	while (line)
 	{

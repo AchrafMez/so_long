@@ -6,7 +6,7 @@
 /*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 23:27:18 by amezioun          #+#    #+#             */
-/*   Updated: 2024/07/13 23:57:57 by amezioun         ###   ########.fr       */
+/*   Updated: 2024/07/14 02:08:37 by amezioun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,20 @@
 void	load_png(t_map *mlx)
 {
 	mlx->texture[0] = mlx_load_png("./solong_assists/floor.png");
+	if (!mlx->texture[0])
+		exit(1);
 	mlx->texture[1] = mlx_load_png("./solong_assists/wall.png");
+	if (!mlx->texture[1])
+		exit(1);
 	mlx->texture[2] = mlx_load_png("./solong_assists/player.png");
-	mlx->texture[3] = mlx_load_png("./solong_assists/03.png");
+	if (!mlx->texture[2])
+		exit(1);
+	mlx->texture[3] = mlx_load_png("./solong_assists/coin.png");
+	if (!mlx->texture[3])
+		exit(1);
 	mlx->texture[4] = mlx_load_png("./solong_assists/exit.png");
+	if (!mlx->texture[4])
+		exit(1);
 }
 
 void	png_to_image(t_map *mlx)
